@@ -34,13 +34,29 @@ const levelYMap: Record<string, number> = {
 };
 
 const CustomNode = ({ data }: any) => {
+  const searchQuery = encodeURIComponent(`${data.label} ${data.author}`);
+  const scholarLink = `https://scholar.google.com/scholar?q=${searchQuery}`;
+  const booksLink = `https://www.google.com/search?tbm=bks&q=${searchQuery}`;
+  const arxivLink = `https://arxiv.org/search/?query=${encodeURIComponent(data.label)}&searchtype=title`;
+
   return (
     <div className={`custom-node type-${data.type}`}>
-      <div className="node-type">{data.type.toUpperCase()}</div>
+      <div className="node-header">
+        <div className="node-type">{data.type.toUpperCase()}</div>
+        <div className="node-level-tag">{data.level}</div>
+      </div>
       <div className="node-label">{data.label}</div>
       <div className="node-info">{data.author} ({data.year})</div>
       <div className="node-desc">{data.description}</div>
-      <div className="node-level">{data.level}</div>
+      
+      <div className="node-audit">
+        <div className="audit-label">VERIFY SOURCE:</div>
+        <div className="audit-links">
+          <a href={scholarLink} target="_blank" rel="noopener noreferrer" className="audit-link">Scholar</a>
+          <a href={booksLink} target="_blank" rel="noopener noreferrer" className="audit-link">Books</a>
+          <a href={arxivLink} target="_blank" rel="noopener noreferrer" className="audit-link">arXiv</a>
+        </div>
+      </div>
     </div>
   );
 };

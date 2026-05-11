@@ -155,51 +155,100 @@ input:focus {
 
 /* Custom Node Styling */
 .custom-node {
-  background: rgba(30, 41, 59, 0.9);
+  background: rgba(30, 41, 59, 0.95);
   border: 1px solid var(--glass-border);
-  padding: 1rem;
-  border-radius: 0.75rem;
-  width: 250px;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  width: 280px;
   color: white;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.custom-node:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-primary);
+}
+
+.node-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
 }
 
 .node-type {
-  font-size: 0.7rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  padding: 0.25rem 0.5rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 0.2rem 0.5rem;
   border-radius: 0.25rem;
-  display: inline-block;
+}
+
+.node-level-tag {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-secondary);
 }
 
 .type-seminal .node-type { background: #ff7eb3; color: black; }
 .type-breakthrough .node-type { background: #7afcff; color: black; }
 .type-pedagogical .node-type { background: #feff9c; color: black; }
+.type-research .node-type { background: #c084fc; color: black; }
 
 .node-label {
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.1rem;
   margin-bottom: 0.25rem;
+  line-height: 1.2;
 }
 
 .node-info {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: var(--text-secondary);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .node-desc {
   font-size: 0.85rem;
-  line-height: 1.4;
-  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  color: #e2e8f0;
 }
 
-.node-level {
-  font-size: 0.7rem;
-  text-transform: uppercase;
+.node-audit {
+  border-top: 1px solid var(--glass-border);
+  padding-top: 0.75rem;
+}
+
+.audit-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.audit-links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.audit-link {
+  font-size: 0.75rem;
   color: var(--accent-primary);
-  font-weight: 600;
+  text-decoration: none;
+  background: rgba(56, 189, 248, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.audit-link:hover {
+  background: var(--accent-primary);
+  color: black;
+  border-color: white;
 }
 
 /* Loader */
