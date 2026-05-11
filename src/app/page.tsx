@@ -74,6 +74,17 @@ export default function Home() {
 
         {error && <div className="error-message">{error}</div>}
 
+        {data && (
+          <div className="nav-shortcuts">
+            <button 
+              onClick={() => document.getElementById('audit-section')?.scrollIntoView({ behavior: 'smooth' })}
+              className="jump-btn"
+            >
+              ↓ Jump to Mastery Assurance & Audit
+            </button>
+          </div>
+        )}
+
         <div className="graph-wrapper">
           {data ? (
             <RoadmapGraph data={data} />
@@ -85,7 +96,7 @@ export default function Home() {
         </div>
 
         {data && (
-          <div className="audit-section-wrapper">
+          <div id="audit-section" className="audit-section-wrapper">
             <h2>🛡️ AI Audit: Mastery Assurance & Gap Analysis</h2>
             <AuditReport gapData={data.gapAnalysis} assuranceData={data.canonAssurance} />
           </div>

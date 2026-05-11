@@ -251,6 +251,29 @@ input:focus {
   border-color: white;
 }
 
+.jump-btn {
+  background: rgba(251, 191, 36, 0.1);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 1rem;
+}
+
+.jump-btn:hover {
+  background: #fbbf24;
+  color: black;
+}
+
+.nav-shortcuts {
+  display: flex;
+  justify-content: center;
+}
+
 /* Audit Report Styling */
 .audit-section-wrapper {
   margin-top: 4rem;
