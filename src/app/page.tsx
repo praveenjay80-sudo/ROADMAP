@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import RoadmapGraph from '@/components/RoadmapGraph';
+import AuditReport from '@/components/AuditReport';
 
 export default function Home() {
   const [topic, setTopic] = useState('');
@@ -82,6 +83,13 @@ export default function Home() {
             </div>
           )}
         </div>
+
+        {data?.gapAnalysis && (
+          <div className="audit-section-wrapper">
+            <h2>🛡️ AI Audit: Missing & Specialized Works</h2>
+            <AuditReport data={data.gapAnalysis} />
+          </div>
+        )}
       </main>
     </div>
   );

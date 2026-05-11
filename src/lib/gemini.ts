@@ -35,12 +35,23 @@ export async function generateRoadmap(topic: string, apiKey: string) {
           "year": "Publication Year",
           "type": "seminal" | "breakthrough" | "pedagogical" | "research",
           "level": "beginner" | "intermediate" | "advanced" | "research",
-          "description": "A detailed 2-3 sentence explanation of why this work is essential and what it contributes to the learner's understanding."
+          "description": "A detailed 2-3 sentence explanation of why this work is essential."
         }
       ],
       "edges": [
         { "source": "node_id_1", "target": "node_id_2" }
-      ]
+      ],
+      "gapAnalysis": {
+        "omissions": [
+          { "title": "Work Title", "reason": "Why it was omitted (e.g., too specialized, redundant with X, etc.)" }
+        ],
+        "alternativePaths": [
+          { "standard": "Book A", "alternative": "Book B", "note": "Why one might prefer the alternative" }
+        ],
+        "researchFrontiers": [
+          "List of 3-5 ultra-niche or very recent topics not covered in the main graph"
+        ]
+      }
     }
   `;
 
