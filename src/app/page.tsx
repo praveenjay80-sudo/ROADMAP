@@ -11,19 +11,25 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<any>(null);
   const [error, setError] = useState('');
+  const [selectedRelated, setSelectedRelated] = useState('');
+  const [selectedNarrow, setSelectedNarrow] = useState('');
 
-  const handleGenerate = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!topic) return;
+  const handleGenerate = async (e?: React.FormEvent, overrideTopic?: string) => {
+    if (e) e.preventDefault();
+    const targetTopic = overrideTopic || topic;
+    if (!targetTopic) return;
 
     setLoading(true);
     setError('');
     setData(null);
+    if (!overrideTopic) {
+      setTopic(targetTopic);
+    }
 
     try {
-      console.log('Requesting roadmap for:', topic);
+      console.log('Requesting roadmap for:', targetTopic);
       const response = await axios.get('/api/roadmap', {
-        params: { topic },
+        params: { topic: targetTopic },
         headers: { 'x-goog-api-key': apiKey }
       });
       console.log('API Response received:', response.data);
@@ -33,6 +39,8 @@ export default function Home() {
       }
 
       setData(response.data);
+      setSelectedRelated('');
+      setSelectedNarrow('');
     } catch (err: any) {
       console.error('Front-end Error:', err);
       const msg = err.response?.data?.error || err.message || 'Failed to generate roadmap';
@@ -40,7 +48,7 @@ export default function Home() {
     } finally {
       setLoading(false);
     }
-    };
+  };
 
   return (
     <div className="app-container">
@@ -50,7 +58,7 @@ export default function Home() {
       </header>
 
       <main className="app-main">
-        <form className="search-form" onSubmit={handleGenerate}>
+        <form className="search-form" onSubmit={(e) => handleGenerate(e)}>
           <div className="input-group">
             <input
               type="text"
@@ -70,8 +78,59 @@ export default function Home() {
               {loading ? <span className="loader"></span> : 'Generate Roadmap'}
             </button>
           </div>
-        </form>
 
+          {data && (
+            <div className="discovery-group">
+              <div className="dropdown-container">
+                <label>Related Terms:</label>
+                <div className="select-with-btn">
+                  <select 
+                    value={selectedRelated} 
+                    onChange={(e) => setSelectedRelated(e.target.value)}
+                    className="term-select"
+                  >
+                    <option value="">Select Related Term...</option>
+                    {data.relatedTerms?.map((term: string) => (
+                      <option key={term} value={term}>{term}</option>
+                    ))}
+                  </select>
+                  <button 
+                    type="button" 
+                    onClick={() => handleGenerate(undefined, selectedRelated)}
+                    disabled={!selectedRelated || loading}
+                    className="pivot-btn"
+                  >
+                    Generate
+                  </button>
+                </div>
+              </div>
+
+              <div className="dropdown-container">
+                <label>Narrow Terms:</label>
+                <div className="select-with-btn">
+                  <select 
+                    value={selectedNarrow} 
+                    onChange={(e) => setSelectedNarrow(e.target.value)}
+                    className="term-select"
+                  >
+                    <option value="">Select Narrow Term...</option>
+                    {data.narrowTerms?.map((term: string) => (
+                      <option key={term} value={term}>{term}</option>
+                    ))}
+                  </select>
+                  <button 
+                    type="button" 
+                    onClick={() => handleGenerate(undefined, selectedNarrow)}
+                    disabled={!selectedNarrow || loading}
+                    className="pivot-btn"
+                  >
+                    Generate
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </form>
         {error && <div className="error-message">{error}</div>}
 
         {data && (

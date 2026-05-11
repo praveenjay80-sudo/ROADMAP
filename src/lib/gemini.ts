@@ -59,7 +59,9 @@ export async function generateRoadmap(topic: string, apiKey: string) {
         ],
         "expertConfidence": "A percentage representing your genuine confidence as an expert curator. Be critical—if the topic is emerging or controversial, the score should be lower.",
         "criticalEvaluation": "A 2-3 sentence candid assessment of the bibliography's limitations. Explain exactly why the coverage score is not 100%."
-      }
+      },
+      "relatedTerms": ["Array of 5-8 related academic fields or topics"],
+      "narrowTerms": ["Array of 5-8 more specific topics exactly one level down in the hierarchy"]
     }
 
     CRITICAL INSTRUCTION: Do not default to high scores like 95%+. If a field is vast, emerging, or has no single consensus, reflect that with lower, more realistic scores. Be a skeptical, elite academic peer-reviewer.
