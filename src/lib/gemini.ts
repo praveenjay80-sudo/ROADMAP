@@ -21,9 +21,9 @@ export async function generateRoadmap(topic: string, apiKey: string) {
     - "advanced": Late graduate level, deep mastery.
     - "research": Cutting-edge papers, current frontier, specialized sub-topics.
 
-    Structure the roadmap as a Directed Acyclic Graph (DAG). Edges MUST represent logical learning dependencies (e.g., you must understand A to appreciate B).
+    Structure the roadmap as a Directed Acyclic Graph (DAG). Edges MUST represent logical learning dependencies.
     
-    Provide at least 15-25 nodes for a truly comprehensive roadmap.
+    DO NOT ARTIFICIALLY LIMIT OR CAP THE ROADMAP. Let it flow naturally. If a topic is vast and requires 50 nodes across 10 distinct sub-levels to be truly mastered, provide them all. If it is narrow, provide only what is essential. You have full autonomy to define the depth.
 
     Return ONLY a valid JSON object with the following structure:
     {

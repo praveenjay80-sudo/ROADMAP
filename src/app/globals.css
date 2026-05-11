@@ -200,7 +200,8 @@ input:focus {
   backdrop-filter: blur(12px);
   border-radius: 1rem;
   border: 1px solid var(--glass-border);
-  min-height: 600px;
+  min-height: 800px;
+  height: auto;
   position: relative;
   overflow: hidden;
 }
