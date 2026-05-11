@@ -39,11 +39,21 @@ export async function generateRoadmap(topic: string, apiKey: string) {
   const response = await result.response;
   const text = response.text();
   
+  console.log('Gemini raw response:', text);
+  
   // Extract JSON from potential markdown formatting
   const jsonMatch = text.match(/\{[\s\S]*\}/);
   if (!jsonMatch) {
+    console.error('Failed to find JSON in response');
     throw new Error('Failed to parse JSON from Gemini response');
   }
   
-  return JSON.parse(jsonMatch[0]);
+  try {
+    const parsed = JSON.parse(jsonMatch[0]);
+    console.log('Parsed Roadmap Data:', JSON.stringify(parsed, null, 2));
+    return parsed;
+  } catch (e) {
+    console.error('JSON Parse Error:', e);
+    throw new Error('Invalid JSON structure returned from AI');
+  }
 }

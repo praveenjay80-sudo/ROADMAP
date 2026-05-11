@@ -49,24 +49,28 @@ const nodeTypes = {
 };
 
 const RoadmapGraph: React.FC<{ data: RoadmapData }> = ({ data }) => {
+  console.log('Rendering RoadmapGraph with data:', data);
+
   const { nodes, edges } = useMemo(() => {
+    if (!data || !data.nodes) return { nodes: [], edges: [] };
+
     // Basic auto-layout based on levels
     const levelCounts: Record<string, number> = { beginner: 0, intermediate: 0, advanced: 0 };
     
     const formattedNodes: Node[] = data.nodes.map((node) => {
-      const x = levelCounts[node.level] * 300;
-      const y = levelYMap[node.level];
-      levelCounts[node.level]++;
+      const x = (levelCounts[node.level] || 0) * 300;
+      const y = levelYMap[node.level] || 0;
+      levelCounts[node.level] = (levelCounts[node.level] || 0) + 1;
       
       return {
-        id: node.id,
+        id: node.id || Math.random().toString(),
         type: 'roadmap',
         data: { ...node },
         position: { x, y },
       };
     });
 
-    const formattedEdges: Edge[] = data.edges.map((edge, index) => ({
+    const formattedEdges: Edge[] = (data.edges || []).map((edge, index) => ({
       id: `e-${index}`,
       source: edge.source,
       target: edge.target,
@@ -78,11 +82,18 @@ const RoadmapGraph: React.FC<{ data: RoadmapData }> = ({ data }) => {
       },
     }));
 
+    console.log('Formatted Nodes:', formattedNodes);
+    console.log('Formatted Edges:', formattedEdges);
+
     return { nodes: formattedNodes, edges: formattedEdges };
   }, [data]);
 
+  if (nodes.length === 0) {
+    return <div className="placeholder">No graph data available to render.</div>;
+  }
+
   return (
-    <div style={{ width: '100%', height: '100%' }}>
+    <div style={{ width: '100%', height: '800px' }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}

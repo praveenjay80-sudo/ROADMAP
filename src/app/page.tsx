@@ -20,17 +20,26 @@ export default function Home() {
     setData(null);
 
     try {
+      console.log('Requesting roadmap for:', topic);
       const response = await axios.get('/api/roadmap', {
         params: { topic },
         headers: { 'x-goog-api-key': apiKey }
       });
+      console.log('API Response received:', response.data);
+
+      if (!response.data || !response.data.nodes || response.data.nodes.length === 0) {
+        throw new Error('API returned an empty roadmap. Please try a different topic.');
+      }
+
       setData(response.data);
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Failed to generate roadmap');
+      console.error('Front-end Error:', err);
+      const msg = err.response?.data?.error || err.message || 'Failed to generate roadmap';
+      setError(msg);
     } finally {
       setLoading(false);
     }
-  };
+    };
 
   return (
     <div className="app-container">
