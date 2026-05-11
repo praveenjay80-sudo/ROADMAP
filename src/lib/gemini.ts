@@ -51,6 +51,13 @@ export async function generateRoadmap(topic: string, apiKey: string) {
         "researchFrontiers": [
           "List of 3-5 ultra-niche or very recent topics not covered in the main graph"
         ]
+      },
+      "canonAssurance": {
+        "coverageScore": "0-100",
+        "corePillars": [
+          { "pillar": "Name of fundamental sub-concept (e.g., General Relativity)", "coveredBy": "Title of work in the nodes", "status": "verified" | "partial" }
+        ],
+        "expertConfidence": "A percentage (e.g. 95%) representing the AI's confidence that this bibliography represents the definitive path to mastery."
       }
     }
   `;

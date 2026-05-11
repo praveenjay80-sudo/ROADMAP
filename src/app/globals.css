@@ -268,6 +268,86 @@ input:focus {
   -webkit-text-fill-color: transparent;
 }
 
+.assurance-check {
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.assurance-stats {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 150px;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #10b981;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.5rem;
+}
+
+.pillars-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.pillar-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  border-left: 4px solid #10b981;
+}
+
+.pillar-item.status-partial {
+  border-left-color: #f59e0b;
+}
+
+.pillar-status {
+  font-weight: 900;
+  font-size: 1.25rem;
+}
+
+.status-verified .pillar-status { color: #10b981; }
+.status-partial .pillar-status { color: #f59e0b; }
+
+.pillar-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.pillar-content strong {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.pillar-content span {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
 .audit-report {
   display: flex;
   flex-direction: column;

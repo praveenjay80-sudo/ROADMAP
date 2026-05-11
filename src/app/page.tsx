@@ -84,10 +84,10 @@ export default function Home() {
           )}
         </div>
 
-        {data?.gapAnalysis && (
+        {data && (
           <div className="audit-section-wrapper">
-            <h2>🛡️ AI Audit: Missing & Specialized Works</h2>
-            <AuditReport data={data.gapAnalysis} />
+            <h2>🛡️ AI Audit: Mastery Assurance & Gap Analysis</h2>
+            <AuditReport gapData={data.gapAnalysis} assuranceData={data.canonAssurance} />
           </div>
         )}
       </main>
