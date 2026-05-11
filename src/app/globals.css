@@ -329,6 +329,30 @@ input:focus {
   margin-top: 0.5rem;
 }
 
+.evaluation-note {
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.evaluation-note strong {
+  display: block;
+  font-size: 0.75rem;
+  color: #fbbf24;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.evaluation-note p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #fef3c7;
+  font-style: italic;
+}
+
 .pillars-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

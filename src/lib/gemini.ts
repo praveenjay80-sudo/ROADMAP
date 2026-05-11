@@ -53,13 +53,16 @@ export async function generateRoadmap(topic: string, apiKey: string) {
         ]
       },
       "canonAssurance": {
-        "coverageScore": "0-100",
+        "coverageScore": "An honest percentage based ONLY on the works selected vs the theoretical ideal of a complete mastery path.",
         "corePillars": [
-          { "pillar": "Name of fundamental sub-concept (e.g., General Relativity)", "coveredBy": "Title of work in the nodes", "status": "verified" | "partial" }
+          { "pillar": "Name of fundamental sub-concept", "coveredBy": "Title of work in the nodes", "status": "verified" | "partial" }
         ],
-        "expertConfidence": "A percentage (e.g. 95%) representing the AI's confidence that this bibliography represents the definitive path to mastery."
+        "expertConfidence": "A percentage representing your genuine confidence as an expert curator. Be critical—if the topic is emerging or controversial, the score should be lower.",
+        "criticalEvaluation": "A 2-3 sentence candid assessment of the bibliography's limitations. Explain exactly why the coverage score is not 100%."
       }
     }
+
+    CRITICAL INSTRUCTION: Do not default to high scores like 95%+. If a field is vast, emerging, or has no single consensus, reflect that with lower, more realistic scores. Be a skeptical, elite academic peer-reviewer.
   `;
 
   const result = await model.generateContent(prompt);

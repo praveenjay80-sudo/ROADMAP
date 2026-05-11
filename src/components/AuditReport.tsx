@@ -10,6 +10,7 @@ interface CanonAssurance {
   coverageScore: string;
   corePillars: Array<{ pillar: string; coveredBy: string; status: 'verified' | 'partial' }>;
   expertConfidence: string;
+  criticalEvaluation: string;
 }
 
 const AuditReport: React.FC<{ gapData: GapAnalysis; assuranceData: CanonAssurance }> = ({ gapData, assuranceData }) => {
@@ -28,13 +29,17 @@ const AuditReport: React.FC<{ gapData: GapAnalysis; assuranceData: CanonAssuranc
               <span className="stat-label">Canon Coverage Score</span>
             </div>
             <div className="stat-card">
-              <span className="stat-value">{assuranceData.expertConfidence}</span>
+              <span className="stat-value">{assuranceData.expertConfidence}%</span>
               <span className="stat-label">Curator Confidence</span>
             </div>
           </div>
 
-          <div className="pillars-list">
-            {assuranceData.corePillars.map((item, idx) => (
+          <div className="evaluation-note">
+            <strong>CURATOR'S CRITICAL EVALUATION:</strong>
+            <p>{assuranceData.criticalEvaluation}</p>
+          </div>
+
+          <div className="pillars-list">            {assuranceData.corePillars.map((item, idx) => (
               <div key={idx} className={`pillar-item status-${item.status}`}>
                 <div className="pillar-status">{item.status === 'verified' ? '✓' : '⚠'}</div>
                 <div className="pillar-content">
