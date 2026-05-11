@@ -5,34 +5,43 @@ export async function generateRoadmap(topic: string, apiKey: string) {
   const model = genAI.getGenerativeModel({ model: 'gemini-flash-latest' });
 
   const prompt = `
-    Generate a detailed academic reading roadmap for the topic: "${topic}".
-    The roadmap should include:
-    1. Seminal works (foundational papers or books).
-    2. Breakthrough works (key advancements).
-    3. Pedagogical resources (textbooks, classic courses).
+    You are an expert academic curator. Generate an EXHAUSTIVE and RIGOROUS academic reading roadmap for the topic: "${topic}".
     
-    Structure the roadmap as a directed acyclic graph (DAG) representing a learning path from Beginner to Intermediate to Advanced.
+    The roadmap must trace a path from absolute fundamentals to cutting-edge research.
     
+    Requirements for Content:
+    1. PEDAGOGICAL: Include the definitive, gold-standard textbooks and classic courses for each level.
+    2. SEMINAL: Include the foundational, history-making papers or books that established the field.
+    3. BREAKTHROUGH: Include the key papers that significantly advanced or pivoted the field in the last 20-30 years.
+    4. RESEARCH: Include specialized, advanced papers that represent the current research frontier.
+
+    Difficulty Levels to Use:
+    - "beginner": Core fundamentals, undergraduate level.
+    - "intermediate": Specialized undergraduate or early graduate level.
+    - "advanced": Late graduate level, deep mastery.
+    - "research": Cutting-edge papers, current frontier, specialized sub-topics.
+
+    Structure the roadmap as a Directed Acyclic Graph (DAG). Edges MUST represent logical learning dependencies (e.g., you must understand A to appreciate B).
+    
+    Provide at least 15-25 nodes for a truly comprehensive roadmap.
+
     Return ONLY a valid JSON object with the following structure:
     {
       "nodes": [
         {
           "id": "unique_id",
-          "label": "Title of work/resource",
-          "author": "Author(s)",
-          "year": "Year of publication",
-          "type": "seminal" | "breakthrough" | "pedagogical",
-          "level": "beginner" | "intermediate" | "advanced",
-          "description": "Brief summary of importance"
+          "label": "Full Title of the Work",
+          "author": "Full Author List",
+          "year": "Publication Year",
+          "type": "seminal" | "breakthrough" | "pedagogical" | "research",
+          "level": "beginner" | "intermediate" | "advanced" | "research",
+          "description": "A detailed 2-3 sentence explanation of why this work is essential and what it contributes to the learner's understanding."
         }
       ],
       "edges": [
         { "source": "node_id_1", "target": "node_id_2" }
       ]
     }
-    
-    Ensure the edges represent logical learning dependencies (e.g., read A before B).
-    Provide at least 8-12 nodes for a comprehensive roadmap.
   `;
 
   const result = await model.generateContent(prompt);

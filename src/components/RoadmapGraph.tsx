@@ -26,10 +26,11 @@ interface RoadmapData {
   }>;
 }
 
-const levelYMap = {
+const levelYMap: Record<string, number> = {
   beginner: 0,
-  intermediate: 300,
-  advanced: 600
+  intermediate: 350,
+  advanced: 700,
+  research: 1050
 };
 
 const CustomNode = ({ data }: any) => {
@@ -55,12 +56,13 @@ const RoadmapGraph: React.FC<{ data: RoadmapData }> = ({ data }) => {
     if (!data || !data.nodes) return { nodes: [], edges: [] };
 
     // Basic auto-layout based on levels
-    const levelCounts: Record<string, number> = { beginner: 0, intermediate: 0, advanced: 0 };
+    const levelCounts: Record<string, number> = { beginner: 0, intermediate: 0, advanced: 0, research: 0 };
     
     const formattedNodes: Node[] = data.nodes.map((node) => {
-      const x = (levelCounts[node.level] || 0) * 300;
-      const y = levelYMap[node.level] || 0;
-      levelCounts[node.level] = (levelCounts[node.level] || 0) + 1;
+      const level = node.level || 'beginner';
+      const x = (levelCounts[level] || 0) * 350;
+      const y = levelYMap[level] || 0;
+      levelCounts[level] = (levelCounts[level] || 0) + 1;
       
       return {
         id: node.id || Math.random().toString(),
@@ -75,15 +77,12 @@ const RoadmapGraph: React.FC<{ data: RoadmapData }> = ({ data }) => {
       source: edge.source,
       target: edge.target,
       animated: true,
-      style: { stroke: '#ffffff' },
+      style: { stroke: '#94a3b8', strokeWidth: 2 },
       markerEnd: {
         type: MarkerType.ArrowClosed,
-        color: '#ffffff',
+        color: '#94a3b8',
       },
     }));
-
-    console.log('Formatted Nodes:', formattedNodes);
-    console.log('Formatted Edges:', formattedEdges);
 
     return { nodes: formattedNodes, edges: formattedEdges };
   }, [data]);
@@ -93,14 +92,15 @@ const RoadmapGraph: React.FC<{ data: RoadmapData }> = ({ data }) => {
   }
 
   return (
-    <div style={{ width: '100%', height: '800px' }}>
+    <div style={{ width: '100%', height: '1200px' }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
         nodeTypes={nodeTypes}
         fitView
+        minZoom={0.1}
       >
-        <Background color="#333" gap={16} />
+        <Background color="#333" gap={20} />
         <Controls />
       </ReactFlow>
     </div>
