@@ -2,7 +2,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 
 export async function generateRoadmap(topic: string, apiKey: string) {
   const genAI = new GoogleGenerativeAI(apiKey);
-  const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+  const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash' });
 
   const prompt = `
     Generate a detailed academic reading roadmap for the topic: "${topic}".
